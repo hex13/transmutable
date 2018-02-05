@@ -1,7 +1,7 @@
 const assert = require('assert');
 
 const { transform } = require('./transform');
-const { State } = require('../mea/state');
+//const { State } = require('../mea/state');
 const { createExample }= require('./testUtils');
 const immer = require('immer').default;
 const {setAutoFreeze } = require('immer');
@@ -50,12 +50,12 @@ benchmark(() => {
 }, 'transmutable (diffing) - array')
 
 
-benchmark(() => {
-    const state = new State(original);
-    state.run(transformer);
-    return state.get();
-}, 'transmutable (State object)- array')
-
+// benchmark(() => {
+//     const state = new State(original);
+//     state.run(transformer);
+//     return state.get();
+// }, 'transmutable (State object)- array')
+//
 
 benchmark(() => {
     return immer(original, transformer);

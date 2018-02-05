@@ -4,7 +4,7 @@
  (representing original state). On right there are two circles: red (because original state is the same before and after), and a blue one (new state derived from first one)](https://raw.githubusercontent.com/hex13/enter-ghost/master/packages/transmutable/logo.svg?sanitize=true)
 
 
-Transmutable is a small library (4.65kB) which allows to write immutable code in a way which is very similar to writing mutable code.
+Transmutable is a small library (4.85kB) which allows to write immutable code in a way which is very similar to writing mutable code.
 
 Instead of `...` / `Object.assign` you just call `transform` with your transforming function as an argument. Your function will get `draft`, i.e. special Proxy object (or just a copy of state, if ES6 Proxies aren't available). Then you can "mutate" your draft object.
 
