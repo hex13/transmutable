@@ -1,7 +1,7 @@
 ### Transmutable - immutable objects that pretend to be mutable
 
 ![logo: on left there is a red circle
- (representing original state). On right there are two circles: red (because original state is the same before and after), and a blue one (new state derived from first one)](https://raw.githubusercontent.com/hex13/enter-ghost/master/packages/transmutable/logo.svg?sanitize=true)
+ (representing original state). On right there are two circles: red (because original state is the same before and after), and a blue one (new state derived from first one)](https://raw.githubusercontent.com/hex13/transmutable/master/logo.svg?sanitize=true)
 
 
 Transmutable is a small library ({{ size }}kB) which allows to write immutable code in a way which is very similar to writing mutable code.
@@ -28,9 +28,9 @@ const o2 = transform((d) => {
 
 ```
 
-After that Transmutable will go through your mutations and will make automatically a new object derived from previous object + mutations you have provided. Things your modify will be copied with changes applied to the copy, things you didn't touch will be copied just by reference (structural sharing) so you don't lose your immutable references. 
+After that Transmutable will go through your mutations and will make automatically a new object derived from previous object + mutations you have provided. Things your modify will be copied with changes applied to the copy, things you didn't touch will be copied just by reference (structural sharing) so you don't lose your immutable references.
 
-![screenshot](https://raw.githubusercontent.com/hex13/enter-ghost/master/packages/transmutable/screenshot-transmutable.png)
+![screenshot](https://raw.githubusercontent.com/hex13/transmutable/master/screenshot-transmutable.png)
 
 It allows for reducing of boilerplate traditionally associated with writing immutable code in JavaScript (especially in libraries like Redux).
 
