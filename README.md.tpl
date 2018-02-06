@@ -34,7 +34,6 @@ After that Transmutable will go through your mutations and will make automatical
 
 It allows for reducing of boilerplate traditionally associated with writing immutable code in JavaScript (especially in libraries like Redux).
 
-
 Consider more mainstream approach...
 
 ```javascript
@@ -75,7 +74,19 @@ Then patch is applied and you have effect similar to nested `...` / `Object.assi
 
 ### Usage
 
-`transform` function:
+* [API](#api)
+    * [transform](#transform)
+    * [transformAt](#transformAt)
+* [integrations](#integrations)
+    * [with Redux](#with-redux)
+* [performance](#performance)
+* [comparison with other libraries](#comparison-with-other-libraries)
+* [gotchas](#gotchas)
+
+
+
+## API
+### transform
 
 ```javascript
 const { transform, transformAt } = require('transmutable');
@@ -100,6 +111,8 @@ const copy = transform(function () {
 ```
 Notice that `this` won't work with [arrow-functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) because they just don't have `this` at all.
 
+
+### transformAt
 
 `transformAt` for applying changes only in the slice of state (concept similar to functional lenses):
 
@@ -135,7 +148,9 @@ Result will be:
 }
 ```
 
-With Redux:
+## integrations
+
+### with Redux:
 
 ```javascript
 const { transform } = require('transmutable');
@@ -211,7 +226,7 @@ transformAt(['foo', 'bar'], bar => bar + 1, {
 
 ---
 
-### Performance
+## Performance
 
 Check out [benchmark code](https://github.com/hex13/enter-ghost/blob/master/packages/transmutable/benchmark.js).
 
@@ -237,7 +252,7 @@ Transmutable: 0.11.0
 
 Immer: 0.8.1
 
-### Comparison
+## Comparison with other libraries
 
 Differences with Immer.
 
@@ -248,7 +263,7 @@ Differences with Immer.
 * Immer supports frozen objects (it can be disabled). Transmutable does not support frozen objects.
 
 
-### Gotchas
+## Gotchas
 
 
 ###### General:
