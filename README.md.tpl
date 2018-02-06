@@ -74,9 +74,10 @@ Then patch is applied and you have effect similar to nested `...` / `Object.assi
 
 ### Usage
 
+* [back to top](#transmutable---immutable-objects-that-pretend-to-be-mutable)
 * [API](#api)
     * [transform](#transform)
-    * [transformAt](#transformAt)
+    * [transformAt](#transformat)
 * [integrations](#integrations)
     * [with Redux](#with-redux)
 * [performance](#performance)
