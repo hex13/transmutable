@@ -10,7 +10,7 @@ Instead of using object spread (`...`) or `Object.assign` you just call `transfo
 Example:
 ```javascript
 const copy = transform(draft => {
-    d.some.object.animal = 'dog';
+    draft.some.object.animal = 'dog';
 }, original);
 
 ```
