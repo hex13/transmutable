@@ -184,35 +184,51 @@ transformAt(['foo', 'bar'], bar => bar + 1, {
 
 ## Performance
 
-Check out [benchmark code](https://github.com/hex13/enter-ghost/blob/master/packages/transmutable/benchmark.js).
+Check out [benchmark code](benchmark.js).
 
 
 Times in ms (the lower the better).
 
-Pushing 1000 objects to array. Repeated 10000 times.
+changing 100 objects in array of 1000 items. Repeated 10000 times.
 
-1. Time for **transmutable** (transform function) - array: 1770ms
-2. Time for immer without autofreeze - array:  2733ms
 
-change one deep property in state. Repeated 10000 times.
+ES6 Proxies
 
-1. Time for hand crafted reducer - example:  48ms
-2. Time for **transmutable** (transform function)- example:  50ms
-3. Time for immer without autofreeze - example:  98ms
+* Time for **transmutable** (ES6 - Proxy):  **2036ms**
+* Time for immer (ES6 - proxies, without autofreeze):  2619ms
+
+ES5 fallback
+
+* Time for **transmutable** (ES5 - diffing):  **830ms**
+* Time for immer (ES5 - getters/setters, without autofreeze):  12881ms
+
+updating arbitrary object, one nested update. Repeated 10000 times
+
+
+ES6 Proxies
+
+* Time for **transmutable** (ES6 - proxies):  **52ms**
+* Time for immer - (ES6 - proxies, without autofreeze):  94ms
+
+ES5 fallback
+
+* Time for transmutable (ES5 - diffing) - example:  473ms
+* Time for **immer** - (ES5 - getters/setters, without autofreeze):  **249ms**
 
 Tested on:
 
 Node v8.4.0
 
-Transmutable: 0.11.0
+Transmutable: 0.15.4
 
-Immer: 0.8.1
+Immer: 1.0.1
 
 ## Comparison with other libraries
 
 Differences with Immer.
 
-* Transmutable is faster (look above)
+* ES6 Proxy implementation of Transmutable is faster than ES6 Proxy implementation of Immer
+* comparison of ES5 implementations seems to be inconclusive (look above into detailed results of the benchmark)
 * Transmutable has additional function `transformAt` for transforming only a slice of state
 * Transmutable support "returnish" style of transformer, Immer does not and displays a warning when you try to do this.
 * `transform`/`produce` functions. Both libraries support parameter order: function, object. Both libraries support currying. But `immer` also supports object, function order.
