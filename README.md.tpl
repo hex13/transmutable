@@ -3,28 +3,15 @@
 ![logo: on left there is a red circle
  (representing original state). On right there are two circles: red (because original state is the same before and after), and a blue one (new state derived from first one)](https://raw.githubusercontent.com/hex13/transmutable/master/logo.svg?sanitize=true)
 
-
 Transmutable is a small library ({{ size }}kB) which allows to write immutable code in a way which is very similar to writing mutable code.
 
-Instead of `...` / `Object.assign` you just call `transform` with your transforming function as an argument. Your function will get `draft`, i.e. special Proxy object (or just a copy of state, if ES6 Proxies aren't available). Then you can "mutate" your draft object.
+Instead of using object spread (`...`) or `Object.assign` you just call `transform` with your transforming function as an argument. Your function will get `draft`, i.e. special Proxy object (or just a copy of state, if ES6 Proxies aren't available). Then you can "mutate" your draft object.
 
 Example:
 ```javascript
-
-const o1 = {
-    some: {
-        object: {
-            animal: 'cat'
-        }
-    },
-    notTouched: {
-        abc: 123
-    }
-};
-
-const o2 = transform((d) => {
+const copy = transform(draft => {
     d.some.object.animal = 'dog';
-}, o1);
+}, original);
 
 ```
 
@@ -34,43 +21,11 @@ After that Transmutable will go through your mutations and will make automatical
 
 It allows for reducing of boilerplate traditionally associated with writing immutable code in JavaScript (especially in libraries like Redux).
 
-Consider more mainstream approach...
-
-```javascript
-copy = {
-  ...foo,
-    bar: {
-      ...foo.bar,
-      baz: 123
-    }
-}
-```
-
-or even this (even more verbose with `Object.assign`):
-
-```javascript
-copy = Object.assign(
-  {},
-  foo,
-  {
-    bar: Object.assign(
-      {},
-      foo.bar,
-      {baz: 123}
-    )
-  }
-)
-```
-
-This is just wrong. Not very readable or maintainable.
-
-And heres comes Transmutable for the rescue.
-
 Transmutable is based on idea that immutability should not come at the cost of developer experience.
 
 So instead of forcing user to manually copying objects with `Object.assign` / `...`, it leaves this part to the library. The library presents you a `draft` (proxy object which records your mutations and creates some kind of patch).
 
-Then patch is applied and you have effect similar to nested `...` / `Object.assign` madness but handled automatically for you.
+Then the patch is applied and you have effect similar to updating your state with `...` or `Object.assign` but handled automatically, without boilerplate.
 
 ### Usage
 
