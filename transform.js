@@ -94,11 +94,16 @@ function applyPatch (node, patch, root, rootPatch) {
         return patch[MUTATION].value;
     }
 
+    let symbols;
+    if (node && typeof node == 'object') {
+        symbols = Object.getOwnPropertySymbols(node);
+    }
+
     if (
         patch
         && node && typeof node == 'object'
         //&& patch[WAS_ACCESSED]
-        && Object.keys(patch).length
+        && Object.keys(patch).length || symbols && symbols.length
     ) {
         let copy;
 
@@ -109,10 +114,19 @@ function applyPatch (node, patch, root, rootPatch) {
             for (let k in node) {
                 copy[k] = node[k];
             }
-
+            if (symbols) {
+                for (let i = 0; i < symbols.length; i++) {
+                    copy[symbols[i]] = node[symbols[i]];
+                }
+            }
         }
-
         for (let k in patch) {
+            const res = applyPatch(node[k], patch[k], root, rootPatch);
+            copy[k] = res;
+        }
+        const patchSymbols = Object.getOwnPropertySymbols(patch);
+        for (let i = 0; i < patchSymbols.length; i++) {
+            const k = patchSymbols[i];
             const res = applyPatch(node[k], patch[k], root, rootPatch);
             copy[k] = res;
         }

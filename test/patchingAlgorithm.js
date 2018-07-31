@@ -86,6 +86,71 @@ describe('applyPatch', () => {
         assert.deepStrictEqual(clone, {undefined: 1234});
     });
 
+    it(`EDGE CASE: It doesn't throw when patch contains new branches`, () => {
+
+        const original = {
+        };
+        
+        const patch = {
+            some: {
+                foo: {
+                    [MUTATION]: {
+                        value: 1
+                    }
+                },
+            },
+        };
+        applyPatch(original, patch);
+    });
+
+    it(`EDGE CASE: It doesn't throw when patch contains empty sub-patch and previous value was null`, () => {
+        const original = {
+            foo: null,
+        };
+        
+        const patch = {
+            foo: {
+            },
+        };
+        applyPatch(original, patch);
+    });
+
+    it('copies Symbol-keyed properties', () => {
+        const SOME_SYMBOL = Symbol();
+        const original = {
+            [SOME_SYMBOL]: 'Hello World',
+            a: {
+
+            },
+        };
+
+        const clone = applyPatch(original, {
+            a: {
+                [MUTATION]: {
+                    value: 444
+                }
+            },
+        });
+
+        assert.strictEqual(clone[SOME_SYMBOL], 'Hello World');
+    });
+
+    it('mutates Symbol-keyed properties', () => {
+        const SOME_SYMBOL = Symbol();
+        const original = {
+            [SOME_SYMBOL]: 'Hello',
+        };
+
+        const clone = applyPatch(original, {
+            [SOME_SYMBOL]: {
+                [MUTATION]: {
+                    value: 'World'
+                }
+            }
+        });
+
+        assert.strictEqual(clone[SOME_SYMBOL], 'World');
+    });
 
 
 });
