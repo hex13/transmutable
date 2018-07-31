@@ -1,6 +1,6 @@
 {
   "name": "transmutable",
-  "version": "0.15.5",
+  "version": "0.16.0",
   "description": "immutable objects that pretend to be mutable",
   "main": "./transform",
   "scripts": {
