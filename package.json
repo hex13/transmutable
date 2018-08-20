@@ -1,8 +1,8 @@
 {
   "name": "transmutable",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "description": "immutable objects that pretend to be mutable",
-  "main": "./transform",
+  "main": "./lib/transform",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
